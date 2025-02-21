@@ -1,0 +1,31 @@
+<div style="text-align: center;">
+  <h1>
+    <a href="" style="text-decoration: none;">
+      <img width="70" alt="RickMarty Logo"
+          src="BlueRickMortyIcon.ico" />
+    </a>
+    {{ title() }}
+    <div class="app-container">
+      <app-theme-toggle></app-theme-toggle>
+    </div>
+  </h1>
+</div>
+
+@if (this.loading) {
+  <div class="overlay">
+    <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+  </div>
+}
+
+<section class="character-section">
+  <div class="character-list">
+    @for (personaje of characters; track $index)
+    {
+      <character [character]="personaje"></character>
+    }
+  </div>
+</section>
+
+<paginator [previousPage]="previousPage" [nextPage]="nextPage" (newItemEvent)="reloadCharacters($event)"></paginator>
+
+<router-outlet />

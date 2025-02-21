@@ -1,0 +1,20 @@
+<div class="character">
+  <!-- animate__zoomInDown, animate__swing, animate__fadeIn -->
+  <div class="character-image">
+    <img class="" src="{{ character?.image }}" alt="{{ character?.name }}">
+  </div>
+
+  <div class="character-body">
+    <h3 class="card-title"> {{ character?.name?.slice(0, 17) }} </h3>
+    <b style="color:rgba(255, 255, 255, 0.656) ;">Estado:</b>
+    <p [class.text-success]="character?.status === 'Alive'" [class.text-danger]="character?.status === 'Dead'">
+      {{ character?.status }} </p>
+    <b style="color:rgba(255, 255, 255, 0.656) ;">Especie:</b>
+    <p class="card-text"> {{ character?.species }} </p>
+    <b style="color:rgba(255, 255, 255, 0.656) ;">Genero:</b>
+    <p class="card-text"> {{ character?.gender }}</p>
+    <b style="color:rgba(255, 255, 255, 0.656) ;">Visto por primera vez en:</b>
+    <p class="card-text">{{ character?.origin?.name }}</p>
+  </div>
+</div>
+
