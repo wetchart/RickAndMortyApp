@@ -6,6 +6,7 @@ import { Character } from '../app/Models/character.model';
 import { RickandmortyService } from './Servicies/rickandmorty.service';
 import { CharacterComponent } from './Cards/character/character.component';
 import { PaginatorComponent } from "./paginator/paginator.component";
+import { ThemeService } from './Servicies/theme.service';
 
 @Component({
   selector: 'app-root-w',
@@ -15,21 +16,19 @@ import { PaginatorComponent } from "./paginator/paginator.component";
 })
 export class AppComponent {
   title = signal('Rick and Morty App');
-  //titleRick = '';
-  // hello() {
-  //   this.titleRick = 'Rick and Morty App';
-  //   return this.titleRick
-  // }
-
   loading = true;
   characters?: Character[];
   previousPage?: string;
   nextPage?: string;
 
-  constructor(private rickandmortyService: RickandmortyService) { }
+  constructor(private rickandmortyService: RickandmortyService, private themeService: ThemeService) { }
 
   ngOnInit() {
     this.getCharacters("");
+  }
+
+  isDarkMode(){
+    return this.themeService.isDarkMode();
   }
 
   public getCharacters(page: string){

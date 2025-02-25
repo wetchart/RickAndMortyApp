@@ -1,8 +1,11 @@
 <div style="text-align: center;">
   <h1>
     <a href="" style="text-decoration: none;">
-      <img width="70" alt="RickMarty Logo"
-          src="BlueRickMortyIcon.ico" />
+      @if (!isDarkMode()) {
+        <img width="70" alt="RickMarty Logo" src="RickMortyIcon.ico" />
+      } @else {
+        <img width="70" alt="RickMarty Logo" src="BlueRickMortyIcon.ico" />
+      }
     </a>
     {{ title() }}
     <div class="app-container">
