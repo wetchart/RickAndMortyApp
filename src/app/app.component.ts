@@ -7,10 +7,13 @@ import { RickandmortyService } from './Servicies/rickandmorty.service';
 import { CharacterComponent } from './Cards/character/character.component';
 import { PaginatorComponent } from "./paginator/paginator.component";
 import { ThemeService } from './Servicies/theme.service';
+import { SeekerComponent } from "./seeker/seeker.component";
+import { Info } from './Models/common.model';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-root-w',
-  imports: [RouterOutlet, ThemeToggleComponent, MatProgressSpinnerModule, CharacterComponent, PaginatorComponent],
+  imports: [RouterOutlet, ThemeToggleComponent, MatProgressSpinnerModule, CharacterComponent, PaginatorComponent, SeekerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
@@ -32,7 +35,7 @@ export class AppComponent {
   }
 
   public getCharacters(page: string){
-    this.loading = true; // Establecer en true antes de cargar los datos
+    this.loading = true;
     this.rickandmortyService.getCharacters(page).subscribe({
       next: (data) => {
         this.previousPage = data.info?.prev ? data.info?.prev : "";
@@ -43,14 +46,23 @@ export class AppComponent {
         console.log(error);
       },
       complete: () => {
-        console.log('Info de la API obtenida con éxito');
-        this.loading = false; // Establecer en false después de cargar los datos
+        console.log('Info from API successfully obtained');
+        this.loading = false;
       }
     });
   }
 
   reloadCharacters(newCharacters: Character[]) {
     this.characters = newCharacters;
+  }
+
+  reloadFoundCharacters(new_data: Info<Character[]>) {
+    console.log("Recargo por búsqueda");
+    console.log(new_data.info);
+    (new_data.info?.prev);
+    this.characters = new_data.results;
+    this.previousPage = new_data.info?.prev ? new_data.info?.prev : "";
+    this.nextPage = new_data.info?.next ? new_data.info?.next : "";
   }
 
 }

@@ -14,6 +14,8 @@
   </h1>
 </div>
 
+<seeker (foundCharactersEvent)="reloadFoundCharacters($event)"></seeker>
+
 @if (this.loading) {
   <div class="overlay">
     <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>

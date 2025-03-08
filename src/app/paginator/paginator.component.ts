@@ -19,17 +19,15 @@ export class PaginatorComponent {
   constructor(private rickandmortyService: RickandmortyService) { }
 
   loadPreviousPage(){
-    console.log("Previous page!");
     this.getCharacters(this.previousPage? this.previousPage : "");
   }
 
   loadNextPage(){
-    console.log("Next page!");
     this.getCharacters(this.nextPage? this.nextPage : "");
   }
 
   public getCharacters(page: string){
-    this.loading = true; // Establecer en true antes de cargar los datos
+    this.loading = true;
     this.rickandmortyService.getCharacters(page).subscribe({
       next: (data) => {
         this.previousPage = data.info?.prev ? data.info?.prev : "";
@@ -40,8 +38,7 @@ export class PaginatorComponent {
         console.log(error);
       },
       complete: () => {
-        console.log('Info de la API obtenida con éxito');
-        this.loading = false; // Establecer en false después de cargar los datos
+        this.loading = false;
         this.newItemEvent.emit(this.characters);
       }
     });
